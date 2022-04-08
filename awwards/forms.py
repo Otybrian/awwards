@@ -4,18 +4,25 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import Textarea
 
+class SignupForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
 
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2')
+
+        
 class ProjectForm(forms.ModelForm):
     
     class Meta:
         model = Project
-        fields = ('title', 'photo','url', 'description', 'link',)
+        fields = ('title', 'photo','link', 'description')
 
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model=Profile
-        field = ['profile_pic', 'location', 'bio']
+        fields = ['profile_pic', 'location', 'bio']
 
 
 class RateForm(forms.ModelForm):

@@ -20,7 +20,7 @@ class Project(models.Model):
     photo = models.ImageField(upload_to='photos/', blank=True, null=True)
     description = models.TextField(max_length=255)
     link = models.URLField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="project")
     date = models.DateTimeField(auto_now_add=True, blank=True)
 
 
