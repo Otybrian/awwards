@@ -1,5 +1,21 @@
 from django import forms
-from .models import Rating, RATE_CHOICES
+from .models import Rating, RATE_CHOICES, Project, Profile
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.forms.widgets import Textarea
+
+
+class ProjectForm(forms.ModelForm):
+    
+    class Meta:
+        model = Project
+        fields = ('title', 'photo','url', 'description', 'link',)
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        field = ['profile_pic', 'location', 'bio']
 
 
 class RateForm(forms.ModelForm):

@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to the awwards clone website. You'll be able to post, view and rate different projects
