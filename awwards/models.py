@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=155)
-    photo = models.ImageField(manual_crop='1280x720')
+    photo = models.ImageField(upload_to='photos/', blank=True, null=True)
     description = models.TextField(max_length=255)
     link = models.URLField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
