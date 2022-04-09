@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ProjectForm, UserProfileForm, RateForm
+from .forms import ProjectForm, UserProfileForm, RatingForm, ReviewForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from .models import Profile, Project, Rating, Review
@@ -77,3 +77,20 @@ def rate(request,id):
     else:
         project = Project.objects.get(id = id) 
         return render(request,"project.html",{"project":project})
+
+@login_required(login_url='/accounts/login/')
+def reviews(request):
+    current_user = request.user
+    project=Project.objects.filter(user_id=current_user.id)
+    review=Review.objects.filter(user_id=current_user.id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.project_id = project
+            review.user=current_user
+            review.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = ReviewForm()
+    return render(request,"reviews.html",{"form":form,"reviews":review,"project":project}) 
