@@ -10,31 +10,30 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.core.exceptions import ObjectDoesNotExist
 from django.http  import Http404
+from collections import UserString
 from django.contrib.messages import constants as messages
 # Create your views here.
 
 def home(request):
-    photo = Project.objects.all().order_by('-id')
-    return render(request, 'home.html',{'photo':photo})
+    project = Project.objects.all().order_by('-id')
+    return render(request, 'home.html',{'projects':project})
 
-def loginpage(request):
-	if request.user.is_authenticated:
-		return redirect('index')
-	else:
-		if request.method == 'POST':
-			username = request.POST.get('username')
-			password =request.POST.get('password')
+@login_required(login_url='/accounts/login/')
+def profile(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    project = Project.objects.filter(user_id=current_user.id)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+        return HttpResponseRedirect('/')
 
-			user = authenticate(request, username=username, password=password)
-
-			if user is not None:
-				login(request, user)
-				return redirect('index')
-			else:
-				messages.info(request, 'Username or password is incorrect')
-
-		context = {}
-		return render(request, 'registration/login.html', context)
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'profile.html', {"form":form,'projects':project,'profile':profile})
 
 
 @login_required(login_url='/accounts/login/')
