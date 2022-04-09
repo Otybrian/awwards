@@ -51,4 +51,14 @@ def new_project(request):
         form = ProjectForm()
     return render(request, 'new_project.html', {"form": form})
 
+@login_required(login_url='/accounts/login/')
+def search(request):
+    if 'search' in request.GET and request.GET['search']:
+        search_term = request.GET.get('search').lower()
+        images = Project.search_by_title(search_term)
+        message = f'{search_term}'
 
+        return render(request, 'search.html', {'message': message, 'images': images})
+    else:
+        message = 'Not found'
+    return render(request, 'search.html', {'message': message})
