@@ -24,7 +24,7 @@ def profile(request):
     profile = Profile.objects.filter(user_id=current_user.id).first()
     project = Project.objects.filter(user_id=current_user.id)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = current_user
@@ -32,20 +32,21 @@ def profile(request):
         return HttpResponseRedirect('/')
 
     else:
-        form = ProfileForm(instance=request.user.profile)
+        form = UserProfileForm(instance=request.user.profile)
     return render(request, 'profile.html', {"form":form,'projects':project,'profile':profile})
 
 
 @login_required(login_url='/accounts/login/')
-def newProject(request):
+def new_project(request):
     current_user = request.user
-    if request.method =='POST':
-        form = ProjectForm(request.POST,request.FILES)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            project = form.save(commit=False)
-            project.username = current_user
-            form.save()
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
         return redirect('home')
+
     else:
         form = ProjectForm()
     return render(request, 'new_project.html', {"form": form})
