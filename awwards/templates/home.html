@@ -1,43 +1,35 @@
-{% extends 'base.html' %}
+{%extends 'base.html'%}
 {% load static %}
-{% load cloudinary %}
 {% block content %}
-
-{% if project.photos %}
-<img src="{{ project.photos.url }}">
-{% endif %}
-<h2>{{project.title}}</h2>
-    
-{% endblock %}
-<div class="row">
+{{block.super}}
+<style>
+  .projects{
+    background-color: lightgrey;
+    margin-top: 50px;
+  }
+  .col{
+    margin-top: -70px;
+  }
+  .card{
+    margin-top:30px;
+  }
+</style>
+<div class='projects'>
+<div class="container">
+  <div class="row">
     {% for project in projects %}
-    <div class=" col-sm-6 col-md-6 col-lg-6">
-        <div class="card my-2 ">
-            <div class="card-header bg-transparent border-light">
-
-
-                <p class="ml-4"> {{project.username}}</p>
-
-            </div>
-           <b><h4 class="cap ml-4">  {{project.title}}</h4></b> 
-            <a style="text-decoration: none;" href="" class="btn btn-outline-light btn-sm m-1">
-
-                <img class="image-thumbail" src="{{ project.screenshot1.url }}" width="500px" height="300px"
-                    alt="Card image cap"></a>
-
-           
-            <div class="desc ml-4">
-                <h5>Description</h5>
-                <p class=""> {{project.description}}</p>
-
-            </div>
-
-            <a href="{{project.link}}" class="ml-4">View link</a>
-
-
-        </div>
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <h4 class="text-center"><strong>Title:</strong>{{project.title}}</h4>
+        <img src="{{ project.image.url }}" class="img-responsive" alt="Image">
+        <p><strong>Description: </strong>{{project.description}}</p>
+        <button><a href="{{project.link}}">Project Link</a></button>
+        <small class="text-muted">{{project.pub_date}}</small>
+        <p><i><a href="{% url 'project_review' project.id %}">Reviews</a></i></p>
+      </div>
     </div>
-    {% empty %}
-    <h2>No Projects ....</h2>
     {% endfor %}
+  </div>
 </div>
+</div>
+{% endblock %}

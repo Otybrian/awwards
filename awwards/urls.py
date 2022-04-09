@@ -6,7 +6,13 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     path('', views.home, name = 'home'),
-    path('newproject/', views.newProject, name = 'add_project'),
+    path('profile/', views.profile, name='profile'),
+    path('new/project/', views.new_project, name='newProject'),
+    path('search/', views.search, name='search_results'),
+    path('reviews/',views.reviews,name = 'reviews'),
+    path('rate/<int:id>',views.rate, name='rating'),
+    path("project/<int:project_id>/", views.project_review, name="project_review"),
+   
 ]
 
 if settings.DEBUG:

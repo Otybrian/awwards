@@ -94,3 +94,9 @@ def reviews(request):
     else:
         form = ReviewForm()
     return render(request,"reviews.html",{"form":form,"reviews":review,"project":project}) 
+
+@login_required(login_url='/accounts/login/')
+def project_review(request, project_id):
+    project = Project.objects.get(id=project_id)
+    rating = Rating.objects.filter(project = project)
+    return render(request, "project_review.html", {"project": project, 'rating':rating})

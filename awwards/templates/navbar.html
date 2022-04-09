@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+
+  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -25,7 +26,7 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: rgb(245, 241, 241);
+        background-color: lightgray;
         overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
@@ -63,16 +64,64 @@
             font-size: 18px;
         }
     }
+    form{
+      display: flex;
+    }
+    .above{
+      background-color: black;
+      height: 35px;
+      color: white;
+    }
+    .nav{
+      height: 50px;
+    }
+    .container-fluid{
+      margin-right: -35px;
+    }
 </style>
 </head>
-
+</head>
 <body>
-    {% block navbar%}   
+  <div class='above'>
+    <center><h3>awwwwards.</h3></center>
+  </div>
+  <nav class="navbar bg-light">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <a class="navbar-brand" href="{%url 'home'%}">Home</a>
+      </div>
+      <form class="navbar-form navbar-left" role="search" action="{% url 'search_results' %}">
+        <input type="text" class="form-control" placeholder="Search Projects" name="search" style="height: 30px; width: 160px;" >
+        <button class="btn btn-primary" type="submit" style="margin-left: 10px; height:30px; padding: 5px;">Submit</button>
+      </form>
+      <ul class="nav navbar-nav">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Account</a>
+          <ul class="dropdown-menu">
+            <li><a href="{%url 'profile'%}">My Profile</a></li>
+            <li><a href="{%url 'newProject' %}">Post Project</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">awwwwards.</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/accounts/login/"><span class="glyphicon glyphicon-log-in"style="text-decoration: none;
+          padding-top:50px; color: black; background-color:none; border: none;">Register/Login</span></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{%url 'newProject' %}"><span class="glyphicon glyphicon-log-in" style="text-decoration: none;
+          padding:35px; color: white; background-color:black;">SUBMIT YOUR PROJECT!</span></a></li>
+      </ul>
+    </div>
+  </nav>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/accounts/login">Register/Login</a>
         <a href=""><i class="fa fa-fw fa-home"></i>Home</a>
-        <a href="{% url 'add_project'%}">Winners</a>
+        <a href="{%url 'newProject' %}">Winners</a>
         <a href="#">Nominees</a>
         <a href="/">Collections</a>
         <a href="/">Academy</a>
@@ -82,10 +131,6 @@
         <a href="/">eBooks & Publications</a>
         <a href="/">Conferences</a>
     </div>
-
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-
-    {% endblock %}
 
 
     <script>
@@ -100,6 +145,5 @@
 
         }
     </script>
-
 </body>
-
+</html>

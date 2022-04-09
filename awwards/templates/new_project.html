@@ -1,11 +1,4 @@
-{% extends 'base.html' %}
-{% load cloudinary %}
-{% load bootstrap4 %}
-{% load static %}
-
-
-{% block content%}
-
+{% load bootstrap4 %} {% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -13,27 +6,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>New Post</title>
-  {{form.media}}
+  <title>New Image</title>
+  {{form.project}}
 
+{% block styles %} {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
 
 </head>
 
 <body>
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-6">
+        <form  action="{%url 'newProject'%}" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+      
+          {% bootstrap_form form%}
+          <input type="submit" class="btn btn-success btn-lg" value="Post">
+        </form>
 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="{% url 'add_project' %}" method="post"  enctype="multipart/form-data">
-
-        {% csrf_token%}
-        {% bootstrap_form form %}
-        <div class="form-group text-center">
-          <input type="submit" class="btn btn-primary sign-up-button" value="Post">
-        </div>
-        <input type="hidden" name="next" value="{{next}}">
-      </form>
+      </div>
     </div>
+
   </div>
+   {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} 
   {% endblock %}
 
 </body>
