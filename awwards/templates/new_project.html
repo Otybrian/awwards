@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 {% load bootstrap4 %}
- {% load static %}
- {% load cloudinary %}
+{% load static %}
+
+
+{% block content%}
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .container{
-      padding-top: 150px;
-    }
-    .post{
-      margin-top: 140px;
-      background-color: rgba(var(--b3f,250,250,250),1);
-    }
-  </style>
+
+  <title>New Post</title>
+  {{form.media}}
+
+
 </head>
+
 <body>
-  {% block content %} 
-  <div class='post'>
-  <div class='container'>
-  <h5>Add a new Project</h5>
-  <form method="post" enctype="multipart/form-data">
-    <h4>New Project</h4>
-    {% csrf_token %}
-    {% bootstrap_form form%}
-    <input type="submit" class="btn btn-success btn-lg" value="Post">
-  </form>
-  {% endblock %}
-   {% block scripts %}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} 
-  {% endblock %}
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="{% url 'add_project' %}" method="post"  enctype="multipart/form-data">
+
+        {% csrf_token%}
+        {% bootstrap_form form %}
+        <div class="form-group text-center">
+          <input type="submit" class="btn btn-primary sign-up-button" value="Post">
+        </div>
+        <input type="hidden" name="next" value="{{next}}">
+      </form>
+    </div>
   </div>
-  </div>
+  {% endblock %}
+
 </body>
 
 </html>

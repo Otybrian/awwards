@@ -1,9 +1,14 @@
 from django.urls import path
 from .import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns=[
     path('', views.home, name = 'home'),
-    path('newproject', views.newProject, name = 'add_Project'),
+    path('newproject/', views.newProject, name = 'add_project'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

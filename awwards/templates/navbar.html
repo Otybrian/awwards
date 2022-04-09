@@ -67,15 +67,12 @@
 </head>
 
 <body>
-    {% block navbar%}
-
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-    
+    {% block navbar%}   
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="/accounts/login">Register/Login</a>
         <a href=""><i class="fa fa-fw fa-home"></i>Home</a>
-        <a href="{% url 'add_Project'%}">Winners</a>
+        <a href="{% url 'add_project'%}">Winners</a>
         <a href="#">Nominees</a>
         <a href="/">Collections</a>
         <a href="/">Academy</a>
@@ -86,16 +83,17 @@
         <a href="/">Conferences</a>
     </div>
 
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
     {% endblock %}
 
 
     <script>
+         function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
         function openNav() {
             document.getElementById("mySidenav").style.width = "300px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
         }
         function toggle() {
             document.getElementById("second").style.width = "0";
