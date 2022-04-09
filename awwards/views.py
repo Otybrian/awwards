@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjectForm, UserProfileForm, RateForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
-from .models import Profile, Project
+from .models import Profile, Project, Rating, Review
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -62,3 +62,18 @@ def search(request):
     else:
         message = 'Not found'
     return render(request, 'search.html', {'message': message})
+
+@login_required(login_url='/accounts/login/')
+def rate(request,id):
+    if request.method == 'POST':
+        project = Project.objects.get(id = id)
+        current_user = request.user
+        design_rate = request.POST['design']
+        content_rate = request.POST['content']
+        usability_rate = request.POST['usability']
+        Rating.objects.create(project=project,user=current_user,design_rate=design_rate,usability_rate=usability_rate,content_rate=content_rate,average=round((float(design_rate)+float(usability_rate)+float(content_rate))/3,2),)
+
+        return render(request,"project_review.html",{"project":project})
+    else:
+        project = Project.objects.get(id = id) 
+        return render(request,"project.html",{"project":project})
