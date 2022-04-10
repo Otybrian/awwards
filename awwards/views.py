@@ -9,9 +9,19 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.core.exceptions import ObjectDoesNotExist
-from django.http  import Http404
+from django.http  import Http404, HttpResponse
+from .email import send_welcome_email
 from collections import UserString
 from django.contrib.messages import constants as messages
+from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import  Project
+from .serializer import ProjectSerializer, ProfileSerializer
+from rest_framework import status
+from .permissions import IsAdminOrReadOnly
+
+
 # Create your views here.
 
 def home(request):
@@ -35,6 +45,12 @@ def profile(request):
         form = UserProfileForm(instance=request.user.profile)
     return render(request, 'profile.html', {"form":form,'projects':project,'profile':profile})
 
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializers = ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)
+
 
 @login_required(login_url='/accounts/login/')
 def new_project(request):
@@ -50,6 +66,20 @@ def new_project(request):
     else:
         form = ProjectForm()
     return render(request, 'new_project.html', {"form": form})
+
+class ProjectList(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
+    def get(self,request,format=None):
+        projects = Project.objects.all()
+        serializer = ProjectSerializer(projects,many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializers = ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @login_required(login_url='/accounts/login/')
 def search(request):

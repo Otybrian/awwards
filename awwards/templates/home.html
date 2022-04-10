@@ -20,8 +20,8 @@
     {% for project in projects %}
     <div class="col-md-4">
       <div class="card mb-4">
-        <h4 class="text-center"><strong>Title:</strong>{{project.title}}</h4>
         <img src="{{ project.image.url }}" class="img-responsive" alt="Image">
+        <h4 class="text-center"><strong>Title:</strong>{{project.title}}</h4>
         <p><strong>Description: </strong>{{project.description}}</p>
         <button><a href="{{project.link}}">Project Link</a></button>
         <small class="text-muted">{{project.pub_date}}</small>
