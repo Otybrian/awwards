@@ -5,7 +5,8 @@
 # Description  
 This project allows users to post their projects for other users to rate according to design, usability and content 
 ##  Live Link  
-
+You can view the site through:
+https://awwwwwards-br.herokuapp.com/
   
 
 ## User Story  
