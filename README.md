@@ -26,10 +26,19 @@ tails.
  
  ###### Posting a project
 An authenticated user is able to post their projects in this page 
+![Screenshot from 2022-04-12 13-42-48](https://user-images.githubusercontent.com/93243367/162943143-f5c03157-b902-4e10-9627-3ef55b80817d.png)
+
 
 
  ###### Login
 An existing user enters their details here to login. There is an option for signing up for new users.
+![Screenshot from 2022-04-12 13-43-07](https://user-images.githubusercontent.com/93243367/162943182-a19ac9e2-dd1f-49d7-892d-e04836c64344.png)
+###### Sign up page
+
+
+
+
+
 
  ###### Rating a Project 
   ![Screenshot from 2022-04-12 12-45-42](https://user-images.githubusercontent.com/93243367/162942814-2c08273e-f070-47ac-bfc9-a2c4808091a2.png)
