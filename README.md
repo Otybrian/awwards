@@ -20,17 +20,20 @@ This project allows users to post their projects for other users to rate accordi
 
 ## Screenshots 
 ###### Home page
- In the homepage, a user is able to login or sign up to be able to to view each project and its details.
+ In the homepage, a user is able to login or sign up to be able to to view each project and its details ![Screenshot from 2022-04-12 12-15-43](https://user-images.githubusercontent.com/93243367/162942678-fc02bb10-a999-421e-8eed-c9cc12b71be4.png)
+tails.
 
  
  ###### Posting a project
 An authenticated user is able to post their projects in this page 
 
+
  ###### Login
 An existing user enters their details here to login. There is an option for signing up for new users.
 
  ###### Rating a Project 
-  
+  ![Screenshot from 2022-04-12 12-45-42](https://user-images.githubusercontent.com/93243367/162942814-2c08273e-f070-47ac-bfc9-a2c4808091a2.png)
+
  
  
 ## Technology used  
