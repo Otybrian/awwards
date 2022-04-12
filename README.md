@@ -35,6 +35,7 @@ An existing user enters their details here to login. There is an option for sign
 ![Screenshot from 2022-04-12 13-43-07](https://user-images.githubusercontent.com/93243367/162943182-a19ac9e2-dd1f-49d7-892d-e04836c64344.png)
 ###### Sign up page
 
+![Screenshot from 2022-04-12 13-43-18](https://user-images.githubusercontent.com/93243367/162943437-1f0001d6-995c-476d-8ad2-8d7beec40ead.png)
 
 
 
