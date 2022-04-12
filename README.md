@@ -68,7 +68,7 @@ Get the project in your local computer
   
 ##### Cloning the repository:  
  ```bash 
- 
+ git clone https://github.com/Otybrian/awwards
 ```
 ##### Navigate into the folder and install requirements  
  ```bash 
