@@ -13,7 +13,7 @@ urlpatterns=[
     path('rate/<int:id>',views.rate, name='rating'),
     path("project/<int:project_id>/", views.project_review, name="project_review"),
     path('api/project/', views.ProjectList.as_view()),
-    path('api/project/', views.ProfiletList.as_view()),
+    path('api/profile/', views.ProfileList.as_view()),
    
 ]
 
