@@ -63,7 +63,9 @@ An existing user enters their details here to login. There is an option for sign
 If you have any question or contributions, please email me at [otbrayo@gmail.com]  
   
   ### Api Endpoints
-
+The app allows for developers to access user profiles and projects API's through the endpoints:
+-https://awwwwwards-br.herokuapp.com/api/profile  - For users Profiles information
+-https://awwwwwards-br.herokuapp.com/api/project  - For Projects posted 
 
     
 ## Setup and Installation  
